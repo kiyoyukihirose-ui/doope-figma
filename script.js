@@ -1,4 +1,27 @@
 (() => {
+  const scaleShell = document.querySelector('[data-scale-shell]');
+  const scaleCanvas = document.querySelector('[data-scale-canvas]');
+  if (scaleShell && scaleCanvas) {
+    const designWidth = 1080;
+    const designHeight = 16212.08984375;
+    let lastWidth = 0;
+
+    const scalePage = () => {
+      const width = scaleShell.clientWidth;
+      if (!width || width === lastWidth) return;
+      lastWidth = width;
+      const scale = width / designWidth;
+      scaleCanvas.style.transform = `scale(${scale})`;
+      scaleShell.style.height = `${designHeight * scale}px`;
+      scaleCanvas.classList.add('is-scaled');
+    };
+
+    scalePage();
+    window.addEventListener('resize', scalePage, { passive: true });
+    window.addEventListener('orientationchange', scalePage, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(scalePage).observe(scaleShell);
+  }
+
   const carousel = document.querySelector('[data-carousel]');
   if (carousel) {
     const track = carousel.querySelector('[data-carousel-track]');
