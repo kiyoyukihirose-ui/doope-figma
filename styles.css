@@ -1,13 +1,13 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{font-family:"Noto Sans JP",Arial,sans-serif}
+body{font-family:Helvetica,Arial,'Zen Kaku Gothic New',sans-serif}
 p{margin:0}
 .artboard-shell{width:100%;max-width:100vw;margin:0 auto;overflow:hidden}
 .artboard{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
 .figma-root{position:relative;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .figma-root img{display:block}
 .figma-root p,.figma-root h1,.figma-root h2,.figma-root h3,.figma-root span,
-.contact-form input,.contact-form textarea,.contact-form button{font-family:'Noto Sans JP',sans-serif!important}
+.contact-form input,.contact-form textarea,.contact-form button{font-family:Helvetica,Arial,'Zen Kaku Gothic New',sans-serif!important;font-kerning:normal;letter-spacing:0}
 .lp-page{background:#ff5a14}
 .lp-page .artboard-shell{position:relative;width:100%;max-width:600px;height:0;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
 .lp-page .artboard{position:absolute;left:0;top:0;width:1080px;max-width:none;height:16212.08984375px;margin:0;opacity:0;transform-origin:top left}
@@ -17,6 +17,10 @@ p{margin:0}
 /* Figma's “Helvetica Neue LT Std 75 Bold” is a bold face. Keep its weight when
    the browser resolves the family through a local font or a fallback. */
 .figma-root [style*="Helvetica Neue LT Std"]{font-weight:700}
+[data-node-id="4:339"] p,[data-node-id="4:371"] p,[data-node-id="4:402"] p,
+[data-node-id="4:450"] p,[data-node-id="4:491"] p,[data-node-id="4:525"] p,
+[data-node-id="4:537"] p,[data-node-id="4:542"] p,[data-node-id="4:546"] p,
+[data-node-id="4:551"] p{text-align:center}
 [data-node-id="4:387"],[data-node-id="4:389"],[data-node-id="4:391"],[data-node-id="4:393"],[data-node-id="4:395"]{left:50%!important;right:auto!important;bottom:auto!important;height:0;transform:translateX(-50%)!important}
 [data-node-id="4:387"]{top:4185.42px!important;width:476.1px}
 [data-node-id="4:389"]{top:12015.38px!important;width:250.54px}
