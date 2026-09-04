@@ -5,7 +5,7 @@ p{margin:0}
 .artboard-shell{width:100%;max-width:100vw;margin:0 auto;overflow:hidden}
 .artboard{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
 .figma-root{position:relative;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-.figma-root img{display:block}
+.figma-root img,.figma-root svg{display:block;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none;pointer-events:none}
 .figma-root p,.figma-root h1,.figma-root h2,.figma-root h3,.figma-root span,
 .contact-form input,.contact-form textarea,.contact-form button{font-family:Helvetica,Arial,'Zen Kaku Gothic New',sans-serif!important;font-kerning:normal;letter-spacing:0}
 .lp-page{background:#ff5a14}
@@ -71,6 +71,7 @@ p{margin:0}
 .contact-form{position:absolute;z-index:12;inset:0;pointer-events:none}
 .contact-form input,.contact-form textarea,.contact-form button{position:absolute;pointer-events:auto;font:700 30px/1.4 'Noto Sans JP',Arial,sans-serif}
 .contact-form input,.contact-form textarea{left:121.23px;width:835.69px;border:0;border-radius:34px;background:#fff;color:#222;padding:16px 28px;outline:none}
+.contact-form input,.contact-form textarea{-webkit-user-select:text!important;user-select:text!important;-webkit-touch-callout:default}
 .contact-form input:focus,.contact-form textarea:focus{box-shadow:0 0 0 6px rgba(255,90,20,.34)}
 #contact-name{top:14967.9008px;height:79.6094px}
 #contact-company{top:15156.4301px;height:79.6104px}
