@@ -1,0 +1,79 @@
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:"Noto Sans JP",Arial,sans-serif}
+p{margin:0}
+.artboard-shell{width:100%;margin:0 auto;overflow:hidden}
+.artboard{display:block;width:100%;height:auto;margin:0 auto}
+.figma-root{position:relative;overflow:hidden}
+.figma-root img{display:block}
+.figma-root p,.figma-root h1,.figma-root h2,.figma-root h3,.figma-root span,
+.contact-form input,.contact-form textarea,.contact-form button{font-family:'Noto Sans JP',sans-serif!important}
+.lp-page{background:#ff5a14}
+.lp-page .artboard-shell{max-width:600px;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
+.lp-page .artboard{max-width:600px}
+.feature-page{background:#1b1b1b}
+
+/* Figma's “Helvetica Neue LT Std 75 Bold” is a bold face. Keep its weight when
+   the browser resolves the family through a local font or a fallback. */
+.figma-root [style*="Helvetica Neue LT Std"]{font-weight:700}
+[data-node-id="4:387"],[data-node-id="4:389"],[data-node-id="4:391"],[data-node-id="4:393"],[data-node-id="4:395"]{left:50%!important;right:auto!important;bottom:auto!important;height:0;transform:translateX(-50%)!important}
+[data-node-id="4:387"]{top:4185.42px!important;width:476.1px}
+[data-node-id="4:389"]{top:12015.38px!important;width:250.54px}
+[data-node-id="4:388"] p{transform:translateX(10px)}
+[data-node-id="4:391"]{top:9322.35px!important;width:735.67px}
+[data-node-id="4:393"]{top:10329.93px!important;width:680.53px}
+[data-node-id="4:395"]{top:14844.03px!important;width:483.56px}
+
+/* Center labels inside their Figma button frames. */
+[data-node-id="4:435"]{top:calc(50% - 63.89px)!important;left:21.87%!important;right:7.16%!important}
+[data-node-id="4:534"]{left:50%!important;transform:translateX(-50%)!important}
+[data-node-id="4:536"]{inset:0!important;display:flex;align-items:center;justify-content:center}
+
+/* The second voice was outlined as a light SVG; match the other two 700-weight voices. */
+.voice-middle-copy>img{display:none!important}
+.voice-middle-copy p{position:absolute;inset:-7px 0 0;margin:0;color:#ff5a14;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-size:38px;line-height:58px;font-weight:700;text-align:center;white-space:nowrap}
+.voice-middle-copy span{display:block}
+
+/* Fine-tune all required badges after switching to Noto Sans JP. */
+[data-node-id="4:563"],[data-node-id="4:566"],[data-node-id="4:569"]{transform:translateY(4px)}
+[data-node-id="4:564"],[data-node-id="4:567"],[data-node-id="4:570"]{transform:translateY(-2px)}
+
+/* Swipeable feature cards. Slide one stays transparent over the original Figma card. */
+.feature-carousel{position:absolute;z-index:8;left:88.95px;top:7145.73px;width:902.1px;height:1360px;touch-action:pan-y;user-select:none}
+.feature-carousel__viewport{width:902.1px;height:1245.47px;overflow:hidden;border-radius:100px}
+.feature-carousel__track{--carousel-index:0;--carousel-drag:0px;display:flex;width:300%;height:1245.47px;transform:translate3d(calc(var(--carousel-index) * -33.333333% + var(--carousel-drag)),0,0);transition:transform .42s cubic-bezier(.22,.72,.28,1);will-change:transform}
+.feature-carousel.is-dragging .feature-carousel__track{transition:none}
+.feature-carousel__slide{position:relative;flex:0 0 33.333333%;width:902.1px;height:1245.47px;overflow:hidden}
+.feature-carousel__slide--transparent{background:transparent}
+.feature-card__background{position:absolute;inset:0;width:902.1px;height:1245.47px}
+.feature-card__heading{position:absolute;left:50.37px;top:82.56px;width:801.35px;height:121.05px}
+.feature-card__heading img{position:absolute;inset:0;width:100%;height:100%}
+.feature-card__heading h3{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;margin:0 0 4px;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-size:65.85px;line-height:1;font-weight:700;color:#fff;white-space:nowrap}
+[data-node-id="4:401"]{inset:0!important;display:flex;align-items:center;justify-content:center;margin:0 0 4px!important;text-align:center}
+.feature-card__chart{position:absolute;left:211.78px;top:271.61px;width:478.65px;height:477.99px}
+.feature-card__chart-label{position:absolute}
+.feature-card__chart-label--cbx{left:523.43px;top:476.75px;width:92.39px;height:83.07px}
+.feature-card__chart-label--cbd{left:310.24px;top:579.27px;width:92.79px;height:83.19px}
+.feature-card__device{position:absolute;left:280.42px;top:223.30px;width:341.26px;height:566.88px;object-fit:fill;mix-blend-mode:multiply}
+.feature-card__copy{position:absolute;left:0;top:806.31px;width:902.1px;margin:0;color:#ff5a14;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-size:40.5px;line-height:77.63px;font-weight:700;text-align:center;white-space:nowrap}
+.feature-card__copy span{display:block}
+.feature-carousel__dots{position:absolute;left:324.25px;top:1316.07px;display:flex;gap:62.8px}
+.feature-carousel__dots button{width:42.4px;height:42.4px;padding:0;border:4px solid #fff;border-radius:50%;background:transparent;cursor:pointer}
+.feature-carousel__dots button.is-active{background:#fff}
+[data-node-id="4:396"],[data-node-id="4:397"],[data-node-id="4:398"]{opacity:0}
+
+/* Real controls placed over the original Figma field shapes. */
+.contact-form{position:absolute;z-index:12;inset:0;pointer-events:none}
+.contact-form input,.contact-form textarea,.contact-form button{position:absolute;pointer-events:auto;font:700 30px/1.4 'Noto Sans JP',Arial,sans-serif}
+.contact-form input,.contact-form textarea{left:121.23px;width:835.69px;border:0;border-radius:34px;background:#fff;color:#222;padding:16px 28px;outline:none}
+.contact-form input:focus,.contact-form textarea:focus{box-shadow:0 0 0 6px rgba(255,90,20,.34)}
+#contact-name{top:14967.9008px;height:79.6094px}
+#contact-company{top:15156.4301px;height:79.6104px}
+#contact-email{top:15344.9701px;height:79.6104px}
+#contact-message{top:15543.1908px;height:217.0693px;resize:none}
+.contact-form button{left:341.3301px;top:15833.3207px;width:397.33px;height:108.6299px;border:0;border-radius:55px;background:#ff5a14;color:#fff;font-size:57.03px;cursor:pointer}
+.contact-form button:hover{filter:brightness(.96)}
+.contact-form button:focus-visible{outline:6px solid #fff;outline-offset:5px}
+[data-node-id="4:554"],[data-node-id="4:555"],[data-node-id="4:556"],[data-node-id="4:557"],[data-node-id="4:495"]{visibility:hidden}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media (min-width:1942px){.feature-page .artboard{max-width:1941.25px}}
