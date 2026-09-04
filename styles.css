@@ -1,16 +1,16 @@
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%}
+html,body{margin:0;min-height:100%;width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:"Noto Sans JP",Arial,sans-serif}
 p{margin:0}
-.artboard-shell{width:100%;margin:0 auto;overflow:hidden}
-.artboard{display:block;width:100%;height:auto;margin:0 auto}
-.figma-root{position:relative;overflow:hidden}
+.artboard-shell{width:100%;max-width:100vw;margin:0 auto;overflow:hidden}
+.artboard{display:block;width:100%;max-width:100%;height:auto;margin:0 auto}
+.figma-root{position:relative;overflow:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .figma-root img{display:block}
 .figma-root p,.figma-root h1,.figma-root h2,.figma-root h3,.figma-root span,
 .contact-form input,.contact-form textarea,.contact-form button{font-family:'Noto Sans JP',sans-serif!important}
 .lp-page{background:#ff5a14}
-.lp-page .artboard-shell{max-width:600px;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
-.lp-page .artboard{max-width:600px}
+.lp-page .artboard-shell{width:100%;max-width:600px;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
+.lp-page .artboard{width:100%;max-width:100%}
 .feature-page{background:#1b1b1b}
 
 /* Figma's “Helvetica Neue LT Std 75 Bold” is a bold face. Keep its weight when
