@@ -1,4 +1,4 @@
-.buy-page{background:#1a1a1a}
+.buy-page{background:#ff5a14}
 .buy-shell{position:relative;width:100%;max-width:600px;height:0;margin:0 auto;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
 .buy-artboard{position:absolute;left:0;top:0;width:1080px;height:6644px;overflow:hidden;background:#ff5a14;opacity:0;transform-origin:top left;color:#fff;font-family:Inter,Helvetica,Arial,sans-serif}
 .buy-artboard.is-scaled{opacity:1}
