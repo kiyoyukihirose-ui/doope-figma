@@ -14,6 +14,8 @@ p{margin:0}
 .lp-page .artboard{position:absolute;left:0;top:0;width:1080px;max-width:none;height:16212.08984375px;margin:0;opacity:0;transform-origin:top left}
 .lp-page .artboard.is-scaled{opacity:1}
 .feature-page{background:#1b1b1b}
+.buy-now-hotspot{position:absolute;z-index:15;left:179.16px;top:8630.2px;width:721.68px;height:139.38px;border-radius:70px;cursor:pointer}
+.buy-now-hotspot:focus-visible{outline:6px solid #fff;outline-offset:7px}
 
 /* Figma's “Helvetica Neue LT Std 75 Bold” is a bold face. Keep its weight when
    the browser resolves the family through a local font or a fallback. */

@@ -2,8 +2,8 @@
   const scaleShell = document.querySelector('[data-scale-shell]');
   const scaleCanvas = document.querySelector('[data-scale-canvas]');
   if (scaleShell && scaleCanvas) {
-    const designWidth = 1080;
-    const designHeight = 16212.08984375;
+    const designWidth = Number(scaleShell.dataset.designWidth) || 1080;
+    const designHeight = Number(scaleShell.dataset.designHeight) || 16212.08984375;
     let lastWidth = 0;
 
     const scalePage = () => {
@@ -84,5 +84,19 @@
   if (form) form.addEventListener('submit', (event) => {
     event.preventDefault();
     form.querySelector('[data-form-status]').textContent = '入力内容を確認しました。';
+  });
+
+  const buyForm = document.querySelector('[data-buy-form]');
+  if (buyForm) buyForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const half = Number(buyForm.elements.quantity_half.value);
+    const full = Number(buyForm.elements.quantity_full.value);
+    const status = buyForm.querySelector('[data-buy-status]');
+    if (half + full === 0) {
+      status.textContent = '数量を選択してください。';
+      return;
+    }
+    sessionStorage.setItem('doopeCart', JSON.stringify({ half, full }));
+    status.textContent = 'カートに追加しました。';
   });
 })();

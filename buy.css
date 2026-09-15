@@ -1,0 +1,52 @@
+.buy-page{background:#1a1a1a}
+.buy-shell{position:relative;width:100%;max-width:600px;height:0;margin:0 auto;overflow:visible;box-shadow:0 0 30px rgba(110,32,10,.45)}
+.buy-artboard{position:absolute;left:0;top:0;width:1080px;height:6644px;overflow:hidden;background:#ff5a14;opacity:0;transform-origin:top left;color:#fff;font-family:Inter,Helvetica,Arial,sans-serif}
+.buy-artboard.is-scaled{opacity:1}
+.buy-header,.buy-footer{position:absolute;left:0;width:1080px;height:174px;background:#e1f550}
+.buy-header{top:0}
+.buy-footer{top:6470px}
+.buy-header a{position:absolute;left:160.02px;top:21.52px;width:214.15px;height:112.25px}
+.buy-header img{width:100%;height:100%}
+.buy-main{position:absolute;left:0;top:174px;width:1080px;height:6296px;background:#ff5a14}
+.buy-product-main{position:absolute;left:137px;top:103px;width:806px;height:806px;object-fit:contain}
+.buy-gallery-dots{position:absolute;left:360.12px;top:967px;display:flex;gap:63.16px}
+.buy-gallery-dots span{width:42.44px;height:42.44px;border:4px solid #fff;border-radius:50%}
+.buy-gallery-dots .is-active{background:#fff}
+#product-title{position:absolute;left:113px;top:1077.48px;margin:0;font-size:110px;line-height:133px;font-weight:400;white-space:nowrap}
+.buy-title-rule{position:absolute;left:115.73px;top:1199.82px;width:559.9px;height:3px;background:#fff}
+.buy-formula{position:absolute;left:120.13px;top:1209.22px;font:400 32px/37px Helvetica,Arial,sans-serif;white-space:nowrap}
+.buy-summary{position:absolute;left:146px;top:1265.33px;width:788.15px;height:338.58px}
+.buy-summary>img{position:absolute;left:0;top:0;width:338.58px;height:338.58px}
+.buy-summary-copy{position:absolute;left:462.15px;top:6.89px;width:326px;font-size:19.24px;line-height:33.68px}
+.buy-summary-copy p+p{margin-top:33.68px}
+.buy-order{position:absolute;inset:0}
+.buy-variant{position:absolute;left:113px;width:778px;height:97px;font-size:64px;line-height:77px}
+.buy-variant--half{top:1630px}
+.buy-variant--full{top:1742px}
+.buy-price{position:absolute;left:0;top:12px;width:240px}
+.buy-size{position:absolute;left:262px;top:12px;white-space:nowrap}
+.buy-variant label{position:absolute;left:577px;top:0;width:201px;height:97px}
+.buy-variant select{width:201px;height:97px;padding:0 81px 0 36px;border:0;border-radius:10px;background:linear-gradient(to right,#fff 0,#fff 120px,#d9d9d9 120px,#d9d9d9 100%);color:#ff5a14;font:400 64px/97px Inter,Arial,sans-serif;appearance:none;cursor:pointer}
+.buy-variant label::after{content:"";position:absolute;right:24px;top:30px;width:29px;height:29px;border-right:4px solid #ff5a14;border-bottom:4px solid #ff5a14;transform:rotate(45deg);pointer-events:none}
+.buy-cart-button{position:absolute;left:123px;top:1909px;width:833px;height:174px;border:4px solid #fff;border-radius:44px;background:transparent;color:#fff;font:400 64px/1 Inter,Arial,sans-serif;cursor:pointer}
+.buy-cart-button:hover{background:rgba(255,255,255,.08)}
+.buy-cart-button:focus-visible,.buy-variant select:focus-visible{outline:6px solid #e1f550;outline-offset:6px}
+.buy-cart-status{position:absolute;left:123px;top:2092px;width:833px;text-align:center;font-size:28px}
+.buy-copy-block{position:absolute;left:39px;width:1012px;font-size:44px;line-height:77px}
+.buy-copy-block h2{margin:0;font:400 44px/77px Inter,Helvetica,Arial,sans-serif}
+.buy-copy-block p{margin:0}
+.buy-warning{top:2223.35px}
+.buy-warning p{margin-top:0}
+.buy-features{top:2608.35px}
+.buy-features p:nth-of-type(2){margin-top:77px}
+.buy-facts{position:absolute;left:28px;top:3225.3px;width:1015px;margin:0;padding:0;list-style:none;font-size:44px;line-height:77px}
+.buy-facts li::before{content:"・"}
+.buy-flavor{top:3994.35px}
+.buy-occasion{top:4226.3px}
+.buy-usage{top:4534.3px}
+.buy-details{top:4995.35px}
+.buy-howto{position:absolute;left:0;top:5531px;width:1080px;height:765px}
+.buy-howto h2{position:absolute;left:181px;top:20px;width:721px;margin:0;font:italic 700 88px/1 Inter,Helvetica,Arial,sans-serif;text-align:center;white-space:nowrap}
+.buy-howto-rule{position:absolute;left:171.9px;top:101.93px;width:735.67px;height:4px;background:#fff}
+.buy-howto-placeholder{position:absolute;left:105px;top:173.4px;width:902.1px;height:507.43px;background:#8b8b8b}
+@media (prefers-reduced-motion:reduce){.buy-cart-button{transition:none}}
