@@ -44,8 +44,12 @@
       refreshScaledPage();
     };
 
+    const scheduleBuyLayout = () => {
+      requestAnimationFrame(() => requestAnimationFrame(layoutBuyPage));
+    };
+
     buyAccordion.querySelectorAll('details').forEach((item) => {
-      item.addEventListener('toggle', () => requestAnimationFrame(layoutBuyPage));
+      item.addEventListener('toggle', scheduleBuyLayout);
     });
     requestAnimationFrame(layoutBuyPage);
     if (document.fonts?.ready) document.fonts.ready.then(layoutBuyPage);
