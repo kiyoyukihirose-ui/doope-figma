@@ -1,25 +1,55 @@
 (() => {
+  let refreshScaledPage = () => {};
   const scaleShell = document.querySelector('[data-scale-shell]');
   const scaleCanvas = document.querySelector('[data-scale-canvas]');
   if (scaleShell && scaleCanvas) {
     const designWidth = Number(scaleShell.dataset.designWidth) || 1080;
-    const designHeight = Number(scaleShell.dataset.designHeight) || 16212.08984375;
     let lastWidth = 0;
 
-    const scalePage = () => {
+    const scalePage = (force = false) => {
       const width = scaleShell.clientWidth;
-      if (!width || width === lastWidth) return;
+      if (!width || (!force && width === lastWidth)) return;
       lastWidth = width;
       const scale = width / designWidth;
+      const designHeight = Number(scaleShell.dataset.designHeight) || 16212.08984375;
       scaleCanvas.style.transform = `scale(${scale})`;
       scaleShell.style.height = `${designHeight * scale}px`;
       scaleCanvas.classList.add('is-scaled');
     };
 
+    refreshScaledPage = () => scalePage(true);
     scalePage();
     window.addEventListener('resize', scalePage, { passive: true });
     window.addEventListener('orientationchange', scalePage, { passive: true });
     if ('ResizeObserver' in window) new ResizeObserver(scalePage).observe(scaleShell);
+  }
+
+  const buyAccordion = document.querySelector('[data-buy-accordion]');
+  if (buyAccordion && scaleShell && scaleCanvas) {
+    const buyMain = document.querySelector('.buy-main');
+    const buyHowto = document.querySelector('.buy-howto');
+    const buyFooter = document.querySelector('.buy-footer');
+
+    const layoutBuyPage = () => {
+      const howtoTop = Math.ceil(buyAccordion.offsetTop + buyAccordion.offsetHeight + 105);
+      const mainHeight = howtoTop + buyHowto.offsetHeight;
+      const footerTop = 174 + mainHeight;
+      const designHeight = footerTop + buyFooter.offsetHeight;
+
+      buyHowto.style.top = `${howtoTop}px`;
+      buyMain.style.height = `${mainHeight}px`;
+      buyFooter.style.top = `${footerTop}px`;
+      scaleCanvas.style.height = `${designHeight}px`;
+      scaleShell.dataset.designHeight = String(designHeight);
+      refreshScaledPage();
+    };
+
+    buyAccordion.querySelectorAll('details').forEach((item) => {
+      item.addEventListener('toggle', () => requestAnimationFrame(layoutBuyPage));
+    });
+    requestAnimationFrame(layoutBuyPage);
+    if (document.fonts?.ready) document.fonts.ready.then(layoutBuyPage);
+    if ('ResizeObserver' in window) new ResizeObserver(layoutBuyPage).observe(buyAccordion);
   }
 
   const carousel = document.querySelector('[data-carousel]');

@@ -48,16 +48,22 @@
 .buy-copy-block p{margin:0}
 .buy-warning{top:2223.35px}
 .buy-warning p{margin-top:0}
-.buy-features{top:2608.35px}
-.buy-features p:nth-of-type(2){margin-top:77px}
-.buy-facts{position:absolute;left:28px;top:3225.3px;width:1015px;margin:0;padding:0;list-style:none;font-size:44px;line-height:77px}
-.buy-facts li::before{content:"・"}
-.buy-flavor{top:3994.35px}
-.buy-occasion{top:4226.3px}
-.buy-usage{top:4534.3px}
-.buy-details{top:4995.35px}
+.buy-accordion{position:absolute;left:39px;top:2608.35px;width:1002px;font-size:44px;line-height:70px}
+.buy-accordion details{border-top:4px solid #fff}
+.buy-accordion details:last-child{border-bottom:4px solid #fff}
+.buy-accordion summary{position:relative;display:flex;align-items:center;min-height:130px;padding:18px 100px 18px 0;font:400 44px/1.35 Inter,Helvetica,Arial,sans-serif;list-style:none;cursor:pointer}
+.buy-accordion summary::-webkit-details-marker{display:none}
+.buy-accordion summary::before,.buy-accordion summary::after{content:"";position:absolute;right:27px;top:50%;width:46px;height:4px;background:#fff;transform:translateY(-50%);transition:transform .25s ease}
+.buy-accordion summary::after{transform:translateY(-50%) rotate(90deg)}
+.buy-accordion details[open] summary::after{transform:translateY(-50%) rotate(0)}
+.buy-accordion summary:focus-visible{outline:6px solid #e1f550;outline-offset:-6px}
+.buy-accordion__content{padding:4px 0 64px}
+.buy-accordion__content p{margin:0}
+.buy-accordion__content p+p{margin-top:70px}
+.buy-accordion__content ul{margin:70px 0 0 -11px;padding:0;list-style:none}
+.buy-accordion__content li::before{content:"・"}
 .buy-howto{position:absolute;left:0;top:5531px;width:1080px;height:765px}
 .buy-howto h2{position:absolute;left:181px;top:20px;width:721px;margin:0;font:italic 700 88px/1 Inter,Helvetica,Arial,sans-serif;text-align:center;white-space:nowrap}
 .buy-howto-rule{position:absolute;left:171.9px;top:101.93px;width:735.67px;height:4px;background:#fff}
 .buy-howto-placeholder{position:absolute;left:105px;top:173.4px;width:902.1px;height:507.43px;background:#8b8b8b}
-@media (prefers-reduced-motion:reduce){.buy-cart-button,.buy-gallery__track{transition:none}}
+@media (prefers-reduced-motion:reduce){.buy-cart-button,.buy-gallery__track,.buy-accordion summary::after{transition:none}}
