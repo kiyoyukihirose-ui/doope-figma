@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260915-1">
-  <link rel="stylesheet" href="buy.css?v=20260915-2">
-  <script src="script.js?v=20260915-1" defer></script>
+  <link rel="stylesheet" href="buy.css?v=20260916-1">
+  <script src="script.js?v=20260916-1" defer></script>
 </head>
 <body class="buy-page">
   <main class="buy-shell" data-scale-shell data-design-width="1080" data-design-height="6644">
@@ -22,10 +22,22 @@
       </header>
 
       <section class="buy-main" aria-labelledby="product-title">
-        <img class="buy-product-main" src="assets/buy-product-main.png" alt="オレンジ色のDOOPE #1">
+        <div class="buy-gallery" data-carousel aria-label="DOOPE #1 商品画像">
+          <div class="buy-gallery__viewport">
+            <div class="buy-gallery__track" data-carousel-track>
+              <div class="buy-gallery__slide"><img src="assets/buy-product-main.png" alt="オレンジ色のDOOPE #1"></div>
+              <div class="buy-gallery__slide buy-gallery__slide--device"><img src="assets/lp-imgPsd.webp" alt="DOOPE本体"></div>
+              <div class="buy-gallery__slide"><img src="assets/lp-imgRectangle1.webp" alt="マンゴーフレーバーのイメージ"></div>
+              <div class="buy-gallery__slide"><img src="assets/lp-imgKv1.webp" alt="DOOPEを手に持つ人物"></div>
+            </div>
+          </div>
 
-        <div class="buy-gallery-dots" aria-hidden="true">
-          <span class="is-active"></span><span></span><span></span><span></span>
+          <div class="buy-gallery-dots" role="tablist" aria-label="商品画像を切り替える">
+            <button type="button" class="is-active" data-carousel-dot role="tab" aria-label="商品画像1" aria-selected="true"></button>
+            <button type="button" data-carousel-dot role="tab" aria-label="商品画像2" aria-selected="false"></button>
+            <button type="button" data-carousel-dot role="tab" aria-label="商品画像3" aria-selected="false"></button>
+            <button type="button" data-carousel-dot role="tab" aria-label="商品画像4" aria-selected="false"></button>
+          </div>
         </div>
 
         <h1 id="product-title">DOOPE #1</h1>

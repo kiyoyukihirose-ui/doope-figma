@@ -45,7 +45,7 @@
     const finishDrag = (event) => {
       if (!dragging) return;
       const delta = event.clientX - startX;
-      if (Math.abs(delta) > 48) index = Math.max(0, Math.min(2, index + (delta < 0 ? 1 : -1)));
+      if (Math.abs(delta) > 48) index = Math.max(0, Math.min(dots.length - 1, index + (delta < 0 ? 1 : -1)));
       dragging = false;
       drag = 0;
       carousel.classList.remove('is-dragging');

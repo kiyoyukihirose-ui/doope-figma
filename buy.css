@@ -8,10 +8,19 @@
 .buy-header a{position:absolute;left:160.02px;top:21.52px;width:214.15px;height:112.25px}
 .buy-header img{width:100%;height:100%}
 .buy-main{position:absolute;left:0;top:174px;width:1080px;height:6296px;background:#ff5a14}
-.buy-product-main{position:absolute;left:137px;top:103px;width:806px;height:806px;object-fit:contain}
-.buy-gallery-dots{position:absolute;left:360.12px;top:967px;display:flex;gap:63.16px}
-.buy-gallery-dots span{width:42.44px;height:42.44px;border:4px solid #fff;border-radius:50%}
-.buy-gallery-dots .is-active{background:#fff}
+.buy-gallery{position:absolute;left:137px;top:103px;width:806px;height:906px;touch-action:pan-y;user-select:none}
+.buy-gallery__viewport{width:806px;height:806px;overflow:hidden}
+.buy-gallery__track{--carousel-index:0;--carousel-drag:0px;display:flex;width:400%;height:806px;transform:translate3d(calc(var(--carousel-index) * -25% + var(--carousel-drag)),0,0);transition:transform .42s cubic-bezier(.22,.72,.28,1);will-change:transform}
+.buy-gallery.is-dragging .buy-gallery__track{transition:none}
+.buy-gallery__slide{flex:0 0 25%;width:806px;height:806px;overflow:hidden;background:#ff5a14}
+.buy-gallery__slide img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.buy-gallery__slide:first-child img{object-fit:contain}
+.buy-gallery__slide--device img{width:72%;height:86%;margin:7% auto;object-fit:contain}
+.buy-gallery__slide:last-child img{object-position:50% 38%}
+.buy-gallery-dots{position:absolute;left:223.12px;top:864px;display:flex;gap:63.16px}
+.buy-gallery-dots button{width:42.44px;height:42.44px;padding:0;border:4px solid #fff;border-radius:50%;background:transparent;cursor:pointer}
+.buy-gallery-dots button.is-active{background:#fff}
+.buy-gallery-dots button:focus-visible{outline:6px solid #e1f550;outline-offset:6px}
 #product-title{position:absolute;left:113px;top:1077.48px;margin:0;font-size:110px;line-height:133px;font-weight:400;white-space:nowrap}
 .buy-title-rule{position:absolute;left:115.73px;top:1199.82px;width:559.9px;height:3px;background:#fff}
 .buy-formula{position:absolute;left:120.13px;top:1209.22px;font:400 32px/37px Helvetica,Arial,sans-serif;white-space:nowrap}
@@ -49,4 +58,4 @@
 .buy-howto h2{position:absolute;left:181px;top:20px;width:721px;margin:0;font:italic 700 88px/1 Inter,Helvetica,Arial,sans-serif;text-align:center;white-space:nowrap}
 .buy-howto-rule{position:absolute;left:171.9px;top:101.93px;width:735.67px;height:4px;background:#fff}
 .buy-howto-placeholder{position:absolute;left:105px;top:173.4px;width:902.1px;height:507.43px;background:#8b8b8b}
-@media (prefers-reduced-motion:reduce){.buy-cart-button{transition:none}}
+@media (prefers-reduced-motion:reduce){.buy-cart-button,.buy-gallery__track{transition:none}}
