@@ -44,12 +44,11 @@
       refreshScaledPage();
     };
 
-    const scheduleBuyLayout = () => {
-      requestAnimationFrame(() => requestAnimationFrame(layoutBuyPage));
-    };
+    const scheduleBuyLayout = () => window.setTimeout(layoutBuyPage, 0);
 
     buyAccordion.querySelectorAll('details').forEach((item) => {
       item.addEventListener('toggle', scheduleBuyLayout);
+      item.querySelector('summary').addEventListener('click', scheduleBuyLayout);
     });
     requestAnimationFrame(layoutBuyPage);
     if (document.fonts?.ready) document.fonts.ready.then(layoutBuyPage);
