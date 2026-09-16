@@ -129,7 +129,81 @@
       status.textContent = '数量を選択してください。';
       return;
     }
-    sessionStorage.setItem('doopeCart', JSON.stringify({ half, full }));
+    let current = { half: 0, full: 0 };
+    try {
+      current = { ...current, ...JSON.parse(sessionStorage.getItem('doopeCart') || '{}') };
+    } catch (_) {
+      current = { half: 0, full: 0 };
+    }
+    sessionStorage.setItem('doopeCart', JSON.stringify({
+      half: Math.min(10, Math.max(0, Number(current.half) || 0) + half),
+      full: Math.min(10, Math.max(0, Number(current.full) || 0) + full)
+    }));
     status.textContent = 'カートに追加しました。';
   });
+
+  const cart = document.querySelector('[data-cart]');
+  if (cart) {
+    const products = {
+      half: { price: 7800 },
+      full: { price: 16800 }
+    };
+    const rows = [...cart.querySelectorAll('[data-cart-item]')];
+    const empty = cart.querySelector('[data-cart-empty]');
+    const summary = cart.querySelector('[data-cart-summary]');
+    const total = cart.querySelector('[data-cart-total]');
+    const count = cart.querySelector('[data-cart-count]');
+    const status = cart.querySelector('[data-cart-status]');
+    let state = { half: 0, full: 0 };
+
+    try {
+      state = { ...state, ...JSON.parse(sessionStorage.getItem('doopeCart') || '{}') };
+    } catch (_) {
+      state = { half: 0, full: 0 };
+    }
+
+    const renderCart = () => {
+      let itemCount = 0;
+      let totalPrice = 0;
+
+      rows.forEach((row) => {
+        const key = row.dataset.cartItem;
+        const quantity = Math.max(0, Number(state[key]) || 0);
+        const select = row.querySelector('[data-cart-quantity]');
+        const lineTotal = row.querySelector('[data-cart-line-total]');
+        row.hidden = quantity === 0;
+        select.value = String(Math.min(quantity, 10));
+        lineTotal.textContent = `¥${(products[key].price * quantity).toLocaleString('ja-JP')}`;
+        itemCount += quantity;
+        totalPrice += products[key].price * quantity;
+      });
+
+      const hasItems = itemCount > 0;
+      empty.hidden = hasItems;
+      summary.hidden = !hasItems;
+      count.textContent = `${itemCount}点`;
+      total.textContent = `¥${totalPrice.toLocaleString('ja-JP')}`;
+      sessionStorage.setItem('doopeCart', JSON.stringify(state));
+    };
+
+    rows.forEach((row) => {
+      const key = row.dataset.cartItem;
+      row.querySelector('[data-cart-quantity]').addEventListener('change', (event) => {
+        state[key] = Number(event.target.value);
+        status.textContent = 'カートを更新しました。';
+        renderCart();
+      });
+      row.querySelector('[data-cart-remove]').addEventListener('click', () => {
+        state[key] = 0;
+        status.textContent = '商品を削除しました。';
+        renderCart();
+      });
+    });
+
+    cart.querySelector('[data-checkout]').addEventListener('click', () => {
+      status.textContent = '購入手続きページは現在準備中です。';
+    });
+
+    renderCart();
+  }
 })();
