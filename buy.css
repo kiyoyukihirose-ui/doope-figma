@@ -12,8 +12,10 @@
 .buy-gallery__viewport{width:806px;height:806px;overflow:hidden}
 .buy-gallery__track{--carousel-index:0;--carousel-drag:0px;display:flex;width:400%;height:806px;transform:translate3d(calc(var(--carousel-index) * -25% + var(--carousel-drag)),0,0);transition:transform .42s cubic-bezier(.22,.72,.28,1);will-change:transform}
 .buy-gallery.is-dragging .buy-gallery__track{transition:none}
-.buy-gallery__slide{flex:0 0 25%;width:806px;height:806px;overflow:hidden;background:#ff5a14}
-.buy-gallery__slide img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.buy-gallery__slide{position:relative;flex:0 0 25%;width:806px;height:806px;overflow:hidden;background:#ff5a14}
+.buy-gallery__slide:not(:first-child){padding:20px}
+.buy-gallery__slide:not(:first-child)::before{content:"";position:absolute;inset:20px;background:#ff5a14;box-shadow:0 0 20px rgba(0,0,0,.35)}
+.buy-gallery__slide img{position:relative;display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
 .buy-gallery__slide:first-child img{object-fit:contain}
 .buy-gallery__slide--device img{width:72%;height:86%;margin:7% auto;object-fit:contain}
 .buy-gallery__slide:last-child img{object-position:50% 38%}
