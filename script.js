@@ -1,4 +1,163 @@
 (() => {
+  // Draw a flowing liquid surface without bubbles. Animate only visible buttons.
+  const liquidButtons = [...document.querySelectorAll('.buy-now-visual')].map((visual) => {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'buy-now-liquid';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.width = 1444;
+    canvas.height = 280;
+    visual.append(canvas);
+    return { visual, canvas, context: canvas.getContext('2d'), visible: false, fill: 0, lastTime: 0 };
+  });
+  if (liquidButtons.length) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let liquidFrame = 0;
+    const drawLiquid = (button, time) => {
+      const ctx = button.context;
+      if (!ctx) return;
+      const width = button.canvas.width;
+      const height = button.canvas.height;
+      ctx.clearRect(0, 0, width, height);
+      const link = button.visual.closest('.buy-now-hotspot');
+      const hovered = window.matchMedia('(hover: hover)').matches && link.matches(':hover');
+      const targetFill = hovered || link.matches(':focus-visible') ? 1 : 0;
+      const delta = button.lastTime ? Math.min(64, time - button.lastTime) : 16;
+      button.lastTime = time;
+      button.fill = reducedMotion.matches ? targetFill : button.fill + (targetFill - button.fill) * (1 - Math.exp(-delta / 190));
+      if (Math.abs(targetFill - button.fill) < .001) button.fill = targetFill;
+      const phase = time / 1000 * Math.PI * 2 / 5.5;
+      const wave = (level, amplitude, offset, color) => {
+        ctx.beginPath();
+        ctx.moveTo(0, height);
+        for (let x = 0; x <= width; x += 4) {
+          const angle = x / width * Math.PI * 2 * 1.15 - phase + offset;
+          const y = height * level + Math.sin(angle) * amplitude
+            + Math.sin(angle * 2 + phase * .35) * amplitude * .18;
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(width, height);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+      };
+      wave(.60 - .76 * button.fill, 24, 0, `rgba(255, 90, 20, ${.70 + .30 * button.fill})`);
+    };
+    const tickLiquid = (time) => {
+      liquidFrame = 0;
+      liquidButtons.forEach((button) => {
+        if (button.visible) drawLiquid(button, time);
+      });
+      if (!document.hidden && !reducedMotion.matches && liquidButtons.some((button) => button.visible)) {
+        liquidFrame = requestAnimationFrame(tickLiquid);
+      }
+    };
+    const syncLiquid = () => {
+      cancelAnimationFrame(liquidFrame);
+      liquidFrame = 0;
+      if (reducedMotion.matches) liquidButtons.forEach((button) => drawLiquid(button, 0));
+      else if (!document.hidden && liquidButtons.some((button) => button.visible)) liquidFrame = requestAnimationFrame(tickLiquid);
+    };
+    liquidButtons.forEach((button) => {
+      drawLiquid(button, 0);
+      const link = button.visual.closest('.buy-now-hotspot');
+      ['pointerenter', 'pointerleave', 'focus', 'blur'].forEach((eventName) => link.addEventListener(eventName, syncLiquid));
+    });
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const button = liquidButtons.find((item) => item.visual === entry.target);
+          button.visible = entry.isIntersecting;
+        });
+        syncLiquid();
+      });
+      liquidButtons.forEach((button) => observer.observe(button.visual));
+    } else {
+      liquidButtons.forEach((button) => { button.visible = true; });
+      syncLiquid();
+    }
+    reducedMotion.addEventListener('change', syncLiquid);
+    document.addEventListener('visibilitychange', syncLiquid);
+  }
+
+  // Cover the viewport with a liquid sweep before following purchase links.
+  const purchaseLinks = [...document.querySelectorAll('.buy-now-hotspot')];
+  if (purchaseLinks.length) {
+    let transitionCanvas = null;
+    let transitionFrame = 0;
+    let transitionFallback = 0;
+    let navigating = false;
+    const resetTransition = () => {
+      cancelAnimationFrame(transitionFrame);
+      clearTimeout(transitionFallback);
+      transitionCanvas?.remove();
+      transitionCanvas = null;
+      navigating = false;
+      document.body.classList.remove('is-liquid-navigating');
+    };
+    window.addEventListener('pageshow', resetTransition);
+    purchaseLinks.forEach((link) => link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      event.preventDefault();
+      if (navigating) return;
+      navigating = true;
+      transitionCanvas = document.createElement('canvas');
+      transitionCanvas.className = 'liquid-page-transition';
+      transitionCanvas.setAttribute('aria-hidden', 'true');
+      const ctx = transitionCanvas.getContext('2d');
+      if (!ctx) { window.location.assign(link.href); return; }
+      document.body.append(transitionCanvas);
+      document.body.classList.add('is-liquid-navigating');
+      let hasNavigated = false;
+      const navigate = () => {
+        if (hasNavigated) return;
+        hasNavigated = true;
+        clearTimeout(transitionFallback);
+        try { sessionStorage.setItem('doopeLiquidArrival', JSON.stringify({ path: new URL(link.href).pathname, time: Date.now() })); } catch (_) {}
+        window.location.assign(link.href);
+      };
+      let start;
+      const duration = 600;
+      const drawSweep = (now) => {
+        if (start === undefined) start = now;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        if (transitionCanvas.width !== Math.round(width * ratio) || transitionCanvas.height !== Math.round(height * ratio)) {
+          transitionCanvas.width = Math.round(width * ratio);
+          transitionCanvas.height = Math.round(height * ratio);
+        }
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        const progress = Math.min(1, (now - start) / duration);
+        const ease = progress * progress * (3 - 2 * progress);
+        const originX = width * .94;
+        const originY = height * .035;
+        const radius = Math.hypot(originX, height - originY) / .91 * ease;
+        ctx.fillStyle = '#ff5a14';
+        ctx.beginPath();
+        for (let i = 0; i <= 160; i++) {
+          const angle = i / 160 * Math.PI * 2;
+          const ripple = 1 + Math.sin(angle * 3 - progress * 5) * .065
+            + Math.sin(angle * 5 + progress * 4) * .025;
+          const x = originX + Math.cos(angle) * radius * ripple;
+          const y = originY + Math.sin(angle) * radius * ripple;
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        if (progress < 1) transitionFrame = requestAnimationFrame(drawSweep);
+        else {
+          ctx.fillRect(0, 0, width, height);
+          navigate();
+        }
+      };
+      // Preserve navigation if rendering is suspended by a background tab.
+      transitionFallback = window.setTimeout(navigate, 1800);
+      transitionFrame = requestAnimationFrame(drawSweep);
+    }));
+  }
+
   let refreshScaledPage = () => {};
   const scaleShell = document.querySelector('[data-scale-shell]');
   const scaleCanvas = document.querySelector('[data-scale-canvas]');
@@ -205,5 +364,59 @@
     });
 
     renderCart();
+  }
+
+  // Continue the orange cover into the destination, draining toward bottom-left.
+  if (document.documentElement.classList.contains('liquid-arriving')) {
+    const cover = document.createElement('canvas');
+    cover.className = 'liquid-page-transition';
+    cover.setAttribute('aria-hidden', 'true');
+    document.body.append(cover);
+    const ctx = cover.getContext('2d');
+    let frame = 0;
+    const cleanup = () => {
+      cancelAnimationFrame(frame);
+      cover.remove();
+      document.documentElement.classList.remove('liquid-arriving');
+    };
+    if (!ctx || window.matchMedia('(prefers-reduced-motion: reduce)').matches) cleanup();
+    else {
+      let start;
+      const reveal = (now) => {
+        if (start === undefined) start = now;
+        const width = window.innerWidth, height = window.innerHeight;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        if (cover.width !== Math.round(width * ratio) || cover.height !== Math.round(height * ratio)) {
+          cover.width = Math.round(width * ratio);
+          cover.height = Math.round(height * ratio);
+        }
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        ctx.clearRect(0, 0, width, height);
+        const progress = Math.min(1, (now - start) / 400);
+        const ease = progress * progress * (3 - 2 * progress);
+        const originX = width * .06, originY = height * .965;
+        const radius = Math.hypot(width - originX, originY) / .91 * (1 - ease);
+        ctx.fillStyle = '#ff5a14';
+        ctx.beginPath();
+        for (let i = 0; i <= 160; i++) {
+          const angle = i / 160 * Math.PI * 2;
+          const ripple = 1 + Math.sin(angle * 3 - progress * 5) * .065 + Math.sin(angle * 5 + progress * 4) * .025;
+          const x = originX + Math.cos(angle) * radius * ripple;
+          const y = originY + Math.sin(angle) * radius * ripple;
+          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        document.documentElement.classList.remove('liquid-arriving');
+        if (progress < 1) frame = requestAnimationFrame(reveal);
+        else cleanup();
+      };
+      frame = requestAnimationFrame(() => {
+        refreshScaledPage();
+        frame = requestAnimationFrame(reveal);
+      });
+      window.setTimeout(cleanup, 1200);
+      window.addEventListener('pagehide', cleanup, { once: true });
+    }
   }
 })();

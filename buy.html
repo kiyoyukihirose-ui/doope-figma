@@ -4,13 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="description" content="DOOPE #1 商品詳細・購入ページ">
+  <style>html.liquid-arriving::after{content:"";position:fixed;inset:0;background:#ff5a14;z-index:2147483001;pointer-events:none}</style>
+  <script>
+    try {
+      const arrival = JSON.parse(sessionStorage.getItem('doopeLiquidArrival') || 'null');
+      sessionStorage.removeItem('doopeLiquidArrival');
+      if (arrival && arrival.path === location.pathname && Date.now() - arrival.time < 5000 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('liquid-arriving');
+        setTimeout(() => document.documentElement.classList.remove('liquid-arriving'), 3000);
+      }
+    } catch (_) {}
+  </script>
+  <link rel="preload" href="assets/buy-product-main.png" as="image">
   <title>DOOPE #1 — 商品詳細</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260915-1">
+  <link rel="stylesheet" href="styles.css?v=20260917-25">
   <link rel="stylesheet" href="buy.css?v=20260916-4">
-  <script src="script.js?v=20260916-5" defer></script>
+  <script src="script.js?v=20260917-25" defer></script>
 </head>
 <body class="buy-page">
   <main class="buy-shell" data-scale-shell data-design-width="1080" data-design-height="6644">
