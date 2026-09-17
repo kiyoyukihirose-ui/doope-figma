@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="cart.css?v=20260916-1">
-  <script src="script.js?v=20260917-32" defer></script>
+  <script src="script.js?v=20260917-34" defer></script>
 </head>
 <body class="cart-page">
   <div class="cart-shell">
@@ -31,14 +31,14 @@
 
       <section class="cart-items" aria-label="カート内の商品">
         <article class="cart-item" data-cart-item="half" hidden>
-          <div class="cart-item__image"><img src="assets/buy-product-main.png" alt="DOOPE #1"></div>
+          <div class="cart-item__image"><img src="assets/buy-product-main.png" alt="Doope"></div>
           <div class="cart-item__body">
-            <p class="cart-item__name">DOOPE #1</p>
-            <p class="cart-item__size">MANGO / 0.5ml</p>
+            <p class="cart-item__name">Doope</p>
+            <p class="cart-item__size">MANGO / 50ml</p>
             <p class="cart-item__unit">¥7,800</p>
             <div class="cart-item__controls">
               <label>数量
-                <select data-cart-quantity aria-label="DOOPE #1 0.5mlの数量">
+                <select data-cart-quantity aria-label="Doope 50mlの数量">
                   <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                 </select>
               </label>
@@ -49,14 +49,14 @@
         </article>
 
         <article class="cart-item" data-cart-item="full" hidden>
-          <div class="cart-item__image"><img src="assets/buy-product-main.png" alt="DOOPE #1"></div>
+          <div class="cart-item__image"><img src="assets/buy-product-main.png" alt="Doope"></div>
           <div class="cart-item__body">
-            <p class="cart-item__name">DOOPE #1</p>
-            <p class="cart-item__size">MANGO / 1.0ml</p>
+            <p class="cart-item__name">Doope</p>
+            <p class="cart-item__size">MANGO / 100ml</p>
             <p class="cart-item__unit">¥16,800</p>
             <div class="cart-item__controls">
               <label>数量
-                <select data-cart-quantity aria-label="DOOPE #1 1mlの数量">
+                <select data-cart-quantity aria-label="Doope 100mlの数量">
                   <option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
                 </select>
               </label>
@@ -76,7 +76,7 @@
         <div class="cart-summary__row"><span>商品数</span><strong data-cart-count>0点</strong></div>
         <div class="cart-summary__row cart-summary__total"><span>TOTAL</span><strong data-cart-total>¥0</strong></div>
         <p class="cart-summary__note">送料・振込手数料は購入手続き画面でご確認ください。</p>
-        <button class="cart-checkout" type="button" data-checkout>購入手続きへ</button>
+        <a class="cart-checkout" href="checkout.html" data-checkout>購入手続きへ</a>
         <a class="cart-continue" href="buy.html">← 買い物を続ける</a>
       </section>
 

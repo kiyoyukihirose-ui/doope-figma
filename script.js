@@ -448,10 +448,6 @@
       });
     });
 
-    cart.querySelector('[data-checkout]').addEventListener('click', () => {
-      status.textContent = '購入手続きページは現在準備中です。';
-    });
-
     renderCart();
   }
 

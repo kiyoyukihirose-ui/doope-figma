@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>CHECKOUT — Doope</title>
+  <link rel="stylesheet" href="cart.css?v=20260916-1">
+  <link rel="stylesheet" href="page-transition.css?v=20260917-29">
+  <link rel="stylesheet" href="checkout.css?v=20260917-34">
+  <script src="script.js?v=20260917-34" defer></script>
+  <script src="checkout.js?v=20260917-34" defer></script>
+</head>
+<body class="cart-page">
+<div class="cart-shell">
+  <header class="cart-header">
+    <a href="index.html" aria-label="DOOPEトップへ戻る"><img src="assets/lp-imgGroup4.svg" alt="DOOPE" width="214" height="112"></a>
+    <a class="checkout-cart" href="cart.html" aria-label="カートを見る"><img src="assets/lp-imgGroup2.svg" alt="" width="99" height="75"></a>
+  </header>
+  <main class="checkout-main">
+    <p class="cart-kicker">ONE MORE STEP.</p><h1>CHECKOUT</h1>
+    <p class="intro">あなたの毎日に、マンゴーの甘さを。</p>
+    <ol class="steps" aria-label="購入手続き"><li><a href="cart.html">01 カート</a></li><li data-input-step aria-current="step">02 情報入力</li><li data-review-step>03 内容確認</li></ol>
+    <section data-empty hidden class="empty"><h2>カートは空です。</h2><p>商品を追加してからお進みください。</p><a class="primary" href="buy.html">商品を見る</a></section>
+    <div data-content hidden>
+      <section class="order-card" aria-labelledby="order-title">
+        <div class="section-heading"><h2 id="order-title">YOUR ORDER</h2><a href="cart.html">カートを編集</a></div>
+        <div data-order-items></div>
+        <dl class="totals"><div><dt>商品小計</dt><dd data-subtotal></dd></div><div><dt>送料</dt><dd>確認中</dd></div><div class="total"><dt>商品合計</dt><dd data-total></dd></div></dl>
+        <p class="fine">送料が未設定のため、お支払い総額はまだ確定していません。</p>
+      </section>
+      <form id="checkout-form">
+        <section class="form-section"><div class="section-heading"><h2><small>01</small> ご注文者情報</h2><span>＊ 必須</span></div>
+          <div class="field-row"><label>姓 ＊<input name="familyName" autocomplete="billing family-name" required maxlength="60" placeholder="山田"></label><label>名 ＊<input name="givenName" autocomplete="billing given-name" required maxlength="60" placeholder="太郎"></label></div>
+          <label>メールアドレス ＊<input name="email" type="email" autocomplete="billing email" required maxlength="254" placeholder="hello@example.com"></label>
+          <p class="field-hint">購入確認メールと振込先のご案内をお送りします。</p>
+          <label>電話番号 <small>任意</small><input name="phone" type="tel" autocomplete="billing tel" maxlength="25" placeholder="090-1234-5678"></label>
+        </section>
+        <section class="form-section"><div class="section-heading"><h2><small>02</small> ご住所・お届け先</h2></div><p class="fine">ご注文者様のご住所をご入力ください。お届けは日本国内です。</p>
+          <div class="field-row"><label>郵便番号 ＊<input name="postal" autocomplete="billing postal-code" required pattern="[0-9０-９]{3}[-ー－]?[0-9０-９]{4}" title="7桁の郵便番号" inputmode="numeric" placeholder="123-4567"></label><label>都道府県 ＊<select name="prefecture" autocomplete="billing address-level1" required data-prefectures><option value="">選択してください</option></select></label></div>
+          <label>市区町村 ＊<input name="city" autocomplete="billing address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="street" autocomplete="billing address-line1" required maxlength="160"></label><label>建物名・部屋番号 ＊<input name="building" autocomplete="billing address-line2" required maxlength="160"></label>
+          <label class="check"><input name="differentShipping" type="checkbox" aria-controls="shipping-fields" aria-expanded="false"><span>別の住所に届ける</span></label>
+          <fieldset id="shipping-fields" hidden disabled><legend>お届け先</legend>
+            <label>氏名 ＊<input name="shippingName" autocomplete="shipping name" required maxlength="120"></label>
+            <div class="field-row"><label>郵便番号 ＊<input name="shippingPostal" autocomplete="shipping postal-code" required pattern="[0-9０-９]{3}[-ー－]?[0-9０-９]{4}" title="7桁の郵便番号" inputmode="numeric"></label><label>都道府県 ＊<select name="shippingPrefecture" autocomplete="shipping address-level1" required data-prefectures><option value="">選択してください</option></select></label></div>
+            <label>市区町村 ＊<input name="shippingCity" autocomplete="shipping address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="shippingStreet" autocomplete="shipping address-line1" required maxlength="160"></label><label>建物名・部屋番号 ＊<input name="shippingBuilding" autocomplete="shipping address-line2" required maxlength="160"></label>
+          </fieldset>
+          <label class="memo">注文メモ <small>任意</small><textarea name="note" rows="3" maxlength="1000" placeholder="お届けに関するご希望など"></textarea></label>
+        </section>
+        <section class="form-section"><div class="section-heading"><h2><small>03</small> お支払い方法</h2></div>
+          <div class="bank-card"><span aria-hidden="true">●</span><div><h3>銀行振込</h3><small>BANK TRANSFER</small><p>振込先口座は、購入確認メールで<br>ご案内します。</p></div><b>選択済み</b></div>
+          <p class="fine">お支払い方法は銀行振込のみとなります。</p>
+        </section>
+        <button class="primary" type="submit">注文内容を確認する <span aria-hidden="true">→</span></button><p class="reassurance">この時点では注文は確定しません。</p><a class="back" href="cart.html">← カートに戻る</a>
+      </form>
+      <section data-review hidden aria-labelledby="review-title"><h2 id="review-title" tabindex="-1">ご注文内容の確認</h2>
+        <div class="review-card"><h3>ご注文者様</h3><p data-customer></p><h3>ご注文者様のご住所</h3><p data-billing></p><h3>お届け先</h3><p data-address></p><h3>お支払い方法</h3><p>銀行振込<br>振込先口座は購入確認メールでご案内します。</p><div data-note-wrap hidden><h3>注文メモ</h3><p data-note></p></div></div>
+        <p class="pending" role="status">現在、注文受付の準備中です。<br>注文の確定・メール送信は行われません。</p><button class="primary" type="button" disabled>注文受付の準備中</button><a class="back edit" href="thanks.html">サンクスページのプレビューを見る →</a><button class="back edit" type="button" data-edit>← 入力内容を変更する</button>
+      </section>
+    </div>
+    <noscript><p>購入手続きにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+  <footer class="cart-footer"><img src="assets/lp-imgGroup4.svg" alt="DOOPE" width="214" height="112"><p>CHILL YOUR LIFE.</p></footer>
+</div>
+</body></html>
