@@ -1,0 +1,7 @@
+/* Fixed to the viewport, outside the scaled Figma artboard. */
+.liquid-page-transition{position:fixed;inset:0;width:100vw;height:100dvh;z-index:2147483000;pointer-events:auto;overflow:hidden}
+.is-liquid-navigating{touch-action:none}
+.is-liquid-navigating .buy-now-visual{animation-play-state:paused}
+
+/* Keep the same content width throughout navigation and page reveal. */
+html{scrollbar-gutter:stable}

@@ -4,16 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="description" content="DOOPE — それは、新しい酔い方。">
+  <style>html.liquid-arriving::after{content:"";position:fixed;inset:0;background:#ff5a14;z-index:2147483001;pointer-events:none}</style>
+  <script>
+    try {
+      const arrival = JSON.parse(sessionStorage.getItem('doopeLiquidArrival') || 'null');
+      sessionStorage.removeItem('doopeLiquidArrival');
+      if (arrival && arrival.path === location.pathname && Date.now() - arrival.time < 5000 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.dataset.liquidFrom = arrival.fromLeft ? 'left' : 'right';
+        document.documentElement.classList.add('liquid-arriving');
+        setTimeout(() => document.documentElement.classList.remove('liquid-arriving'), 3000);
+      }
+    } catch (_) {}
+  </script>
+  <link rel="stylesheet" href="page-transition.css?v=20260917-29">
   <title>DOOPE — それは、新しい酔い方。</title>
   <link rel="prefetch" href="buy.html" as="document">
-  <link rel="prefetch" href="buy.css?v=20260916-4" as="style">
+  <link rel="prefetch" href="buy.css?v=20260917-31" as="style">
   <link rel="prefetch" href="assets/buy-product-main.png" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700&display=swap" rel="stylesheet">
   <link rel="preload" href="assets/lp-imgKv1.webp" as="image" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260917-25">
-  <script src="script.js?v=20260917-25" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260917-27">
+  <script src="script.js?v=20260917-32" defer></script>
 </head>
 <body class="lp-page">
   <main class="artboard-shell" data-scale-shell aria-label="DOOPE — それは、新しい酔い方。">

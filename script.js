@@ -80,7 +80,7 @@
   }
 
   // Cover the viewport with a liquid sweep before following purchase links.
-  const purchaseLinks = [...document.querySelectorAll('.buy-now-hotspot')];
+  const purchaseLinks = [...document.querySelectorAll('.buy-now-hotspot, header a[aria-label="DOOPEトップへ戻る"]')];
   if (purchaseLinks.length) {
     let transitionCanvas = null;
     let transitionFrame = 0;
@@ -101,6 +101,7 @@
       event.preventDefault();
       if (navigating) return;
       navigating = true;
+      const fromLeft = !!link.closest('header');
       transitionCanvas = document.createElement('canvas');
       transitionCanvas.className = 'liquid-page-transition';
       transitionCanvas.setAttribute('aria-hidden', 'true');
@@ -113,11 +114,11 @@
         if (hasNavigated) return;
         hasNavigated = true;
         clearTimeout(transitionFallback);
-        try { sessionStorage.setItem('doopeLiquidArrival', JSON.stringify({ path: new URL(link.href).pathname, time: Date.now() })); } catch (_) {}
+        try { sessionStorage.setItem('doopeLiquidArrival', JSON.stringify({ path: new URL(link.href).pathname, time: Date.now(), fromLeft })); } catch (_) {}
         window.location.assign(link.href);
       };
       let start;
-      const duration = 600;
+      const duration = 300;
       const drawSweep = (now) => {
         if (start === undefined) start = now;
         const width = window.innerWidth;
@@ -131,9 +132,9 @@
         ctx.clearRect(0, 0, width, height);
         const progress = Math.min(1, (now - start) / duration);
         const ease = progress * progress * (3 - 2 * progress);
-        const originX = width * .94;
+        const originX = width * (fromLeft ? .06 : .94);
         const originY = height * .035;
-        const radius = Math.hypot(originX, height - originY) / .91 * ease;
+        const radius = Math.hypot(Math.max(originX, width - originX), height - originY) / .91 * ease;
         ctx.fillStyle = '#ff5a14';
         ctx.beginPath();
         for (let i = 0; i <= 160; i++) {
@@ -278,6 +279,90 @@
     form.querySelector('[data-form-status]').textContent = '入力内容を確認しました。';
   });
 
+  const cartHeader = document.querySelector('.buy-header__cart');
+  const cartCount = () => {
+    try {
+      const state = JSON.parse(sessionStorage.getItem('doopeCart') || '{}');
+      return ['half', 'full'].reduce((sum, key) => sum + Math.min(10, Math.max(0, Math.floor(Number(state?.[key]) || 0))), 0);
+    } catch (_) { return 0; }
+  };
+  const syncCartBadges = () => {
+    const count = cartCount();
+    document.querySelectorAll('[data-cart-badge]').forEach((badge) => {
+      badge.textContent = String(count);
+      badge.hidden = count === 0;
+      badge.closest('a')?.setAttribute('aria-label', 'カートを見る（' + count + '点）');
+    });
+  };
+  let floatingCart = null;
+  let floatingCartTimer = 0;
+  const cartFlights = new Set();
+  if (cartHeader) {
+    syncCartBadges();
+    window.addEventListener('pageshow', syncCartBadges);
+    window.addEventListener('storage', syncCartBadges);
+    window.addEventListener('pagehide', () => {
+      clearTimeout(floatingCartTimer);
+      floatingCart?.remove();
+      floatingCart = null;
+      cartFlights.forEach((flight) => flight.remove());
+      cartFlights.clear();
+    });
+  }
+  const flyToCart = (button) => {
+    if (!cartHeader) return;
+    let target = cartHeader;
+    const headerRect = cartHeader.getBoundingClientRect();
+    if (headerRect.top < 0 || headerRect.bottom > window.innerHeight) {
+      if (!floatingCart) {
+        floatingCart = document.createElement('a');
+        floatingCart.href = cartHeader.href;
+        floatingCart.className = 'cart-flight-target';
+        const icon = document.createElement('img');
+        icon.src = 'assets/lp-imgGroup2.svg';
+        icon.alt = '';
+        const badge = document.createElement('span');
+        badge.className = 'buy-cart-badge';
+        badge.setAttribute('data-cart-badge', '');
+        floatingCart.append(icon, badge);
+        document.body.append(floatingCart);
+      }
+      target = floatingCart;
+    }
+    clearTimeout(floatingCartTimer);
+    syncCartBadges();
+    const finish = () => {
+      syncCartBadges();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        target.animate([{ scale: '1' }, { scale: '1.18', offset: .45 }, { scale: '1' }], { duration: 300, easing: 'ease-out' });
+      }
+      clearTimeout(floatingCartTimer);
+      floatingCartTimer = setTimeout(() => { floatingCart?.remove(); floatingCart = null; }, 1800);
+    };
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+    const start = button.getBoundingClientRect();
+    const end = target.getBoundingClientRect();
+    const x0 = start.left + start.width / 2 - 24, y0 = start.top + start.height / 2 - 24;
+    const x1 = end.left + end.width / 2 - 24, y1 = end.top + end.height / 2 - 24;
+    const cx = Math.min(window.innerWidth - 48, Math.max(x0, x1) + 70);
+    const cy = Math.max(0, y0 - 100);
+    const flight = document.createElement('img');
+    flight.className = 'cart-flight';
+    flight.src = 'assets/buy-product-main.png';
+    flight.alt = '';
+    flight.setAttribute('aria-hidden', 'true');
+    document.body.append(flight);
+    cartFlights.add(flight);
+    const frames = Array.from({ length: 25 }, (_, i) => {
+      const t = i / 24, u = 1 - t;
+      const x = u * u * x0 + 2 * u * t * cx + t * t * x1;
+      const y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+      return { transform: 'translate(' + x + 'px,' + y + 'px) scale(' + (1 - t * .65) + ')', opacity: t > .85 ? (1 - t) / .15 : 1, offset: t };
+    });
+    const animation = flight.animate(frames, { duration: 850, easing: 'cubic-bezier(.3,.05,.35,1)', fill: 'forwards' });
+    animation.finished.then(() => { flight.remove(); cartFlights.delete(flight); finish(); }, () => { flight.remove(); cartFlights.delete(flight); });
+  };
+
   const buyForm = document.querySelector('[data-buy-form]');
   if (buyForm) buyForm.addEventListener('submit', (event) => {
     event.preventDefault();
@@ -294,11 +379,15 @@
     } catch (_) {
       current = { half: 0, full: 0 };
     }
+    const beforeCount = cartCount();
     sessionStorage.setItem('doopeCart', JSON.stringify({
       half: Math.min(10, Math.max(0, Number(current.half) || 0) + half),
       full: Math.min(10, Math.max(0, Number(current.full) || 0) + full)
     }));
-    status.textContent = 'カートに追加しました。';
+    const added = cartCount() - beforeCount;
+    if (added <= 0) { status.textContent = '各サイズの上限は10点です。'; return; }
+    status.textContent = added + '点をカートに追加しました。';
+    flyToCart(buyForm.querySelector('.buy-cart-button'));
   });
 
   const cart = document.querySelector('[data-cart]');
@@ -366,57 +455,63 @@
     renderCart();
   }
 
-  // Continue the orange cover into the destination, draining toward bottom-left.
+  // Prepare visible artwork under the cover, then reveal on a compositor layer.
   if (document.documentElement.classList.contains('liquid-arriving')) {
-    const cover = document.createElement('canvas');
+    const fromLeft = document.documentElement.dataset.liquidFrom === 'left';
+    const cover = document.createElement('div');
     cover.className = 'liquid-page-transition';
     cover.setAttribute('aria-hidden', 'true');
+    const shape = document.createElement('div');
+    const width = window.innerWidth, height = window.innerHeight;
+    const originX = width * (fromLeft ? .94 : .06), originY = height * .965;
+    const radius = Math.hypot(Math.max(originX, width - originX), originY) / .91;
+    const size = radius * 2.2;
+    const points = [];
+    for (let i = 0; i < 160; i++) {
+      const angle = i / 160 * Math.PI * 2;
+      const ripple = 1 + Math.sin(angle * 3) * .065 + Math.sin(angle * 5) * .025;
+      points.push((50 + Math.cos(angle) * ripple / 2.2 * 100) + '% ' + (50 + Math.sin(angle) * ripple / 2.2 * 100) + '%');
+    }
+    Object.assign(shape.style, {
+      position: 'absolute', width: size + 'px', height: size + 'px',
+      left: (originX - size / 2) + 'px', top: (originY - size / 2) + 'px',
+      background: '#ff5a14', clipPath: 'polygon(' + points.join(',') + ')',
+      transformOrigin: 'center', willChange: 'transform'
+    });
+    cover.append(shape);
     document.body.append(cover);
-    const ctx = cover.getContext('2d');
-    let frame = 0;
+    let animation;
+    let disposed = false;
     const cleanup = () => {
-      cancelAnimationFrame(frame);
+      disposed = true;
+      animation?.cancel();
       cover.remove();
       document.documentElement.classList.remove('liquid-arriving');
     };
-    if (!ctx || window.matchMedia('(prefers-reduced-motion: reduce)').matches) cleanup();
+    window.addEventListener('pagehide', cleanup, { once: true });
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) cleanup();
     else {
-      let start;
-      const reveal = (now) => {
-        if (start === undefined) start = now;
-        const width = window.innerWidth, height = window.innerHeight;
-        const ratio = Math.min(window.devicePixelRatio || 1, 2);
-        if (cover.width !== Math.round(width * ratio) || cover.height !== Math.round(height * ratio)) {
-          cover.width = Math.round(width * ratio);
-          cover.height = Math.round(height * ratio);
-        }
-        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-        ctx.clearRect(0, 0, width, height);
-        const progress = Math.min(1, (now - start) / 400);
-        const ease = progress * progress * (3 - 2 * progress);
-        const originX = width * .06, originY = height * .965;
-        const radius = Math.hypot(width - originX, originY) / .91 * (1 - ease);
-        ctx.fillStyle = '#ff5a14';
-        ctx.beginPath();
-        for (let i = 0; i <= 160; i++) {
-          const angle = i / 160 * Math.PI * 2;
-          const ripple = 1 + Math.sin(angle * 3 - progress * 5) * .065 + Math.sin(angle * 5 + progress * 4) * .025;
-          const x = originX + Math.cos(angle) * radius * ripple;
-          const y = originY + Math.sin(angle) * radius * ripple;
-          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        }
-        ctx.closePath();
-        ctx.fill();
-        document.documentElement.classList.remove('liquid-arriving');
-        if (progress < 1) frame = requestAnimationFrame(reveal);
-        else cleanup();
-      };
-      frame = requestAnimationFrame(() => {
-        refreshScaledPage();
-        frame = requestAnimationFrame(reveal);
+      refreshScaledPage();
+      const visibleImages = [...document.images].filter((img) => {
+        const rect = img.getBoundingClientRect();
+        return rect.bottom > 0 && rect.top < height && rect.right > 0 && rect.left < width;
       });
-      window.setTimeout(cleanup, 1200);
-      window.addEventListener('pagehide', cleanup, { once: true });
+      const artworkReady = Promise.allSettled(visibleImages.map((img) => img.decode()));
+      const ready = Promise.allSettled([artworkReady, document.fonts.ready]);
+      // Slow external resources cannot leave the page covered indefinitely.
+      Promise.race([ready, new Promise((resolve) => setTimeout(resolve, 350))]).then(() => {
+        if (disposed) return;
+        refreshScaledPage();
+        requestAnimationFrame(() => {
+          if (disposed) return;
+          document.documentElement.classList.remove('liquid-arriving');
+          animation = shape.animate([{ transform: 'scale(1)' }, { transform: 'scale(0)' }], {
+            duration: 300, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards'
+          });
+          animation.finished.then(cleanup, cleanup);
+          setTimeout(cleanup, 1200);
+        });
+      });
     }
   }
 })();

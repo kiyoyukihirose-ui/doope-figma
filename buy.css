@@ -67,3 +67,14 @@
 .buy-howto-rule{position:absolute;left:171.9px;top:101.93px;width:735.67px;height:4px;background:#fff}
 .buy-howto-placeholder{position:absolute;left:105px;top:173.4px;width:902.1px;height:507.43px;background:#8b8b8b}
 @media (prefers-reduced-motion:reduce){.buy-cart-button,.buy-gallery__track,.buy-accordion summary::after{transition:none}}
+
+.buy-header .buy-header__cart{left:auto;right:140px;top:21.52px;width:120px;height:120px;display:flex;align-items:center;justify-content:center;border-radius:18px}
+.buy-header .buy-header__cart img{width:99.19px;height:74.9px}
+.buy-header .buy-header__cart:focus-visible{outline:5px solid #ff5a14;outline-offset:4px}
+
+.buy-cart-badge{position:absolute;right:-12px;top:0;min-width:48px;height:48px;padding:0 8px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:#ff5a14;color:#fff;font:700 30px/1 Arial,sans-serif;box-shadow:0 0 0 4px #e1f550;pointer-events:none}
+.buy-cart-badge[hidden]{display:none}
+.cart-flight{position:fixed;left:0;top:0;width:48px;height:48px;border-radius:50%;object-fit:cover;background:#e1f550;border:2px solid #e1f550;box-shadow:0 5px 15px #76230a40;pointer-events:none;z-index:1000;will-change:transform}
+.cart-flight-target{position:fixed;right:max(16px,calc((100vw - 600px)/2 + 28px));top:18px;width:54px;height:54px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#e1f550;box-shadow:0 4px 18px #76230a30;z-index:999}
+.cart-flight-target img{width:36px;height:28px}
+.cart-flight-target .buy-cart-badge{right:-5px;top:-5px;min-width:21px;height:21px;padding:0 5px;font-size:12px;box-shadow:0 0 0 2px #e1f550}
