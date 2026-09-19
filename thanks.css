@@ -23,3 +23,5 @@
 @keyframes seal-appear{from{opacity:0;transform:translateY(12px) rotate(-18deg) scale(.8)}to{opacity:1;transform:translateY(0) rotate(-9deg) scale(1)}}
 @media(max-width:430px){.thanks-main{padding:35px 20px 50px}.thanks-seal{width:72px;height:72px;margin-bottom:24px}.thanks-hero h2{font-size:18px}.thanks-message{font-size:13px}.thanks-payment{padding:25px 19px}.thanks-payment>h2{font-size:21px}.thanks-next{margin-top:22px}.thanks-next li{gap:10px}.thanks-next h3{font-size:14px}.thanks-next p{font-size:11px}.thanks-preview{font-size:10px}}
 @media(prefers-reduced-motion:reduce){.thanks-seal{animation:none}}
+
+.thanks-contact{margin-top:30px}.thanks-hero{margin-bottom:42px}

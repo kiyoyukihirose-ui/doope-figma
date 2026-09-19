@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="checkout.css?v=20260917-34">
   <script src="script.js?v=20260917-34" defer></script>
   <script src="checkout.js?v=20260917-34" defer></script>
+  <script src="postal-address.js?v=20260918-1" defer></script>
+  <script src="order-config.js?v=20260918-1" defer></script>
+  <script src="order-submit.js?v=20260918-1" defer></script>
 </head>
 <body class="cart-page">
 <div class="cart-shell">
@@ -25,8 +28,8 @@
       <section class="order-card" aria-labelledby="order-title">
         <div class="section-heading"><h2 id="order-title">YOUR ORDER</h2><a href="cart.html">カートを編集</a></div>
         <div data-order-items></div>
-        <dl class="totals"><div><dt>商品小計</dt><dd data-subtotal></dd></div><div><dt>送料</dt><dd>確認中</dd></div><div class="total"><dt>商品合計</dt><dd data-total></dd></div></dl>
-        <p class="fine">送料が未設定のため、お支払い総額はまだ確定していません。</p>
+        <dl class="totals"><div><dt>商品小計</dt><dd data-subtotal></dd></div><div><dt>送料</dt><dd data-shipping-fee>確認中</dd></div><div class="total"><dt data-total-label>商品合計</dt><dd data-total></dd></div></dl>
+        <p class="fine" data-shipping-note>送料が未設定のため、お支払い総額はまだ確定していません。</p>
       </section>
       <form id="checkout-form">
         <section class="form-section"><div class="section-heading"><h2><small>01</small> ご注文者情報</h2><span>＊ 必須</span></div>
@@ -54,7 +57,7 @@
       </form>
       <section data-review hidden aria-labelledby="review-title"><h2 id="review-title" tabindex="-1">ご注文内容の確認</h2>
         <div class="review-card"><h3>ご注文者様</h3><p data-customer></p><h3>ご注文者様のご住所</h3><p data-billing></p><h3>お届け先</h3><p data-address></p><h3>お支払い方法</h3><p>銀行振込<br>振込先口座は購入確認メールでご案内します。</p><div data-note-wrap hidden><h3>注文メモ</h3><p data-note></p></div></div>
-        <p class="pending" role="status">現在、注文受付の準備中です。<br>注文の確定・メール送信は行われません。</p><button class="primary" type="button" disabled>注文受付の準備中</button><a class="back edit" href="thanks.html">サンクスページのプレビューを見る →</a><button class="back edit" type="button" data-edit>← 入力内容を変更する</button>
+        <p class="pending" role="status" data-order-status>現在、注文受付の準備中です。<br>注文の確定・メール送信は行われません。</p><button class="primary" type="button" data-place-order disabled>注文受付の準備中</button><a class="back edit" href="thanks.html">サンクスページのプレビューを見る →</a><button class="back edit" type="button" data-edit>← 入力内容を変更する</button>
       </section>
     </div>
     <noscript><p>購入手続きにはJavaScriptを有効にしてください。</p></noscript>
