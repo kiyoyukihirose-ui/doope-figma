@@ -91,7 +91,7 @@ p{margin:0}
 
 /* A soft pulse and tactile feedback for both purchase buttons. */
 .buy-now-hotspot{transform-origin:center;transition:transform .2s ease,filter .2s ease;-webkit-tap-highlight-color:transparent}
-.buy-now-visual{position:absolute;inset:0;transform-origin:center;animation:buy-now-breathe 5s ease-in-out infinite;transition:transform .2s ease}
+.buy-now-visual{position:absolute;inset:0;transform-origin:center;animation:buy-now-breathe 5s ease-in-out infinite;box-shadow:0 0 20px rgba(255,255,255,calc(.65 * var(--liquid-shadow,0))),0 0 32px rgba(255,255,255,calc(.35 * var(--liquid-shadow,0)));transition:transform .2s ease}
 .buy-now-visual [data-name="Vector"]{transition:filter .45s ease}
 .buy-now-visual p{transition:color .45s ease}
 @keyframes buy-now-breathe{0%,15%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(110,32,10,0))}65%{transform:scale(1.05);filter:drop-shadow(0 14px 10px rgba(110,32,10,.3))}90%{transform:scale(.99);filter:drop-shadow(0 3px 3px rgba(110,32,10,.08))}}
@@ -116,3 +116,32 @@ p{margin:0}
 .buy-now-visual{overflow:hidden;border-radius:38.17px;isolation:isolate}
 .buy-now-visual>div{z-index:2}
 .buy-now-liquid{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+
+.footer-legal{position:absolute;right:40px;bottom:12px;z-index:5;display:flex;flex-direction:column;align-items:flex-end}
+.footer-legal a{display:inline-flex;align-items:center;min-height:56px;padding:4px 12px;color:#fff;font-size:34px;line-height:1.4;text-decoration:underline;text-underline-offset:6px;gap:10px}
+.footer-legal a:focus-visible{outline:4px solid #e1f550;outline-offset:4px;border-radius:8px}
+
+.police-link{position:absolute;left:calc(50% + 16.26px);top:13852.93px;display:flex;align-items:center;justify-content:center;gap:22px;width:650px;height:112px;padding:0 28px;border-radius:30px;background:#fff;color:#ff5a14;font:700 46px/1.4 Helvetica,Arial,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer;transform:translateX(-50%);box-shadow:0 8px 0 rgba(125,42,8,.16),0 12px 24px rgba(125,42,8,.12);transition:background-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.police-link__arrow{font-size:52px;line-height:1}
+@media(hover:hover){.police-link:hover{background:#e1f550;transform:translate(-50%,-5px);box-shadow:0 12px 0 rgba(125,42,8,.14),0 18px 28px rgba(125,42,8,.12)}}
+.police-link:focus-visible{background:#e1f550;outline:5px solid #fff;outline-offset:8px}
+.police-link:active{background:#e1f550;transform:translate(-50%,4px);box-shadow:0 2px 0 rgba(125,42,8,.16),0 4px 10px rgba(125,42,8,.1)}
+@media(prefers-reduced-motion:reduce){.police-link{transition:none}.police-link:hover,.police-link:active{transform:translateX(-50%)}}
+
+.site-menu-toggle{position:absolute;inset:0.24% 89.14% 99.41% 3.61%;padding:0;border:0;background:transparent;display:block;cursor:pointer;z-index:20}
+.site-menu-toggle::before{content:"";position:absolute;inset:-36px}
+.figma-root .site-menu-toggle img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:fill}
+.site-menu-toggle:focus-visible{outline:4px solid #ff5a14;outline-offset:-4px;border-radius:10px}
+.site-menu{position:fixed;z-index:1000;width:320px;max-width:calc(100vw - 24px);padding:24px;background:#ff5a14;border:0;border-radius:4px 4px 32px 4px;color:#fff;box-shadow:0 14px 32px #7d2a0833;animation:site-menu-enter .18s ease-out;max-height:calc(100dvh - 100px);overflow-y:auto}
+.site-menu[hidden]{display:none}
+.site-menu a{display:flex;align-items:center;min-height:62px;padding:12px 4px;color:#fff;text-decoration:none;font:italic 700 clamp(22px,6vw,28px)/1.2 Helvetica,Arial,sans-serif;letter-spacing:-.7px;transition:color .15s ease}
+.site-menu a:hover{color:#e1f550}
+.site-menu a:focus-visible{color:#e1f550;outline:2px solid #e1f550;outline-offset:2px;border-radius:4px}
+.site-menu a:active{color:#e1f550;text-decoration:underline;text-underline-offset:6px}
+@keyframes site-menu-enter{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.site-menu{animation:none}.site-menu a{transition:none}}
+
+.hero-slideshow{position:absolute;left:0;top:0.86%;width:1080px;height:1434.83px;overflow:hidden;z-index:0;isolation:isolate}
+.figma-root .hero-slideshow img{position:absolute;inset:0;display:block;width:1080px;height:1434.83px;object-fit:cover;object-position:center;opacity:0;transition:opacity .9s ease}
+.figma-root .hero-slideshow img.is-visible{opacity:1}
+@media(prefers-reduced-motion:reduce){.figma-root .hero-slideshow img{transition:none}}

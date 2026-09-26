@@ -19,15 +19,15 @@
     const list = document.querySelector('[data-order-items]');
     list.replaceChildren();
     let total = 0; count = 0;
-    [{key:'half',size:'50ml',price:7800},{key:'full',size:'100ml',price:16800}].forEach(product => {
+    [{key:'half',size:'0.5ml',price:7800},{key:'full',size:'1.0ml',price:16800}].forEach(product => {
       const quantity = Math.min(10, Math.max(0, Math.floor(Number(cart[product.key]) || 0)));
       if (!quantity) return;
       count += quantity; total += product.price * quantity;
       const row = document.createElement('article'); row.className = 'order-item';
       const mark = document.createElement('div'); mark.className = 'order-item__mark'; mark.textContent = product.size;
       const info = document.createElement('div'); info.className = 'order-item__info';
-      const title = document.createElement('h3'); title.textContent = 'Doope';
-      const size = document.createElement('p'); size.textContent = 'MANGO CANDY / ' + product.size;
+      const title = document.createElement('h3'); title.textContent = 'DOOPE #1';
+      const size = document.createElement('p'); size.textContent = 'MANGO / ' + product.size;
       const qty = document.createElement('p'); qty.textContent = money(product.price) + ' × ' + quantity;
       const amount = document.createElement('strong'); amount.textContent = money(product.price * quantity);
       info.append(title,size,qty); row.append(mark,info,amount); list.append(row);

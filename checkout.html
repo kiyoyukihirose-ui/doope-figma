@@ -40,12 +40,12 @@
         </section>
         <section class="form-section"><div class="section-heading"><h2><small>02</small> ご住所・お届け先</h2></div><p class="fine">ご注文者様のご住所をご入力ください。お届けは日本国内です。</p>
           <div class="field-row"><label>郵便番号 ＊<input name="postal" autocomplete="billing postal-code" required pattern="[0-9０-９]{3}[-ー－]?[0-9０-９]{4}" title="7桁の郵便番号" inputmode="numeric" placeholder="123-4567"></label><label>都道府県 ＊<select name="prefecture" autocomplete="billing address-level1" required data-prefectures><option value="">選択してください</option></select></label></div>
-          <label>市区町村 ＊<input name="city" autocomplete="billing address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="street" autocomplete="billing address-line1" required maxlength="160"></label><label>建物名・部屋番号 ＊<input name="building" autocomplete="billing address-line2" required maxlength="160"></label>
+          <label>市区町村 ＊<input name="city" autocomplete="billing address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="street" autocomplete="billing address-line1" required maxlength="160"></label><label>建物名・部屋番号 <small>任意</small><input name="building" autocomplete="billing address-line2" maxlength="160"></label>
           <label class="check"><input name="differentShipping" type="checkbox" aria-controls="shipping-fields" aria-expanded="false"><span>別の住所に届ける</span></label>
           <fieldset id="shipping-fields" hidden disabled><legend>お届け先</legend>
             <label>氏名 ＊<input name="shippingName" autocomplete="shipping name" required maxlength="120"></label>
             <div class="field-row"><label>郵便番号 ＊<input name="shippingPostal" autocomplete="shipping postal-code" required pattern="[0-9０-９]{3}[-ー－]?[0-9０-９]{4}" title="7桁の郵便番号" inputmode="numeric"></label><label>都道府県 ＊<select name="shippingPrefecture" autocomplete="shipping address-level1" required data-prefectures><option value="">選択してください</option></select></label></div>
-            <label>市区町村 ＊<input name="shippingCity" autocomplete="shipping address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="shippingStreet" autocomplete="shipping address-line1" required maxlength="160"></label><label>建物名・部屋番号 ＊<input name="shippingBuilding" autocomplete="shipping address-line2" required maxlength="160"></label>
+            <label>市区町村 ＊<input name="shippingCity" autocomplete="shipping address-level2" required maxlength="120"></label><label>町名・番地 ＊<input name="shippingStreet" autocomplete="shipping address-line1" required maxlength="160"></label><label>建物名・部屋番号 <small>任意</small><input name="shippingBuilding" autocomplete="shipping address-line2" maxlength="160"></label>
           </fieldset>
           <label class="memo">注文メモ <small>任意</small><textarea name="note" rows="3" maxlength="1000" placeholder="お届けに関するご希望など"></textarea></label>
         </section>

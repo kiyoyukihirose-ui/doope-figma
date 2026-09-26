@@ -19,14 +19,16 @@
   <link rel="stylesheet" href="page-transition.css?v=20260917-29">
   <title>DOOPE — それは、新しい酔い方。</title>
   <link rel="prefetch" href="buy.html" as="document">
-  <link rel="prefetch" href="buy.css?v=20260918-3" as="style">
+  <link rel="prefetch" href="buy.css?v=20260925-1" as="style">
   <link rel="prefetch" href="assets/buy-product-main.png" as="image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700&display=swap" rel="stylesheet">
   <link rel="preload" href="assets/lp-imgKv1.webp" as="image" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=20260917-27">
-  <script src="script.js?v=20260917-34" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20260926-8">
+  <script src="script.js?v=20260919-2" defer></script>
+  <script src="site-menu.js?v=20260926-1" defer></script>
+  <script src="hero-slideshow.js?v=20260926-2" defer></script>
 </head>
 <body class="lp-page">
   <main class="artboard-shell" data-scale-shell aria-label="DOOPE — それは、新しい酔い方。">
@@ -52,6 +54,10 @@
             </div>
           </div>
         </div>
+        <div class="hero-slideshow" aria-label="DOOPE メインビジュアル">
+          <img src="assets/hero-man.png" alt="" width="1210" height="1625" decoding="async" data-node-id="44:90">
+          <img src="assets/hero-couple.png" alt="" width="1230" height="1650" decoding="async" data-node-id="44:93">
+        </div>
         <div style="position:absolute;inset:23.29% 0 43.97% 0" data-node-id="4:331" data-name="Vector">
           <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgVector2.svg">
         </div>
@@ -70,7 +76,7 @@
         <div style="position:absolute;inset:30.28% 8.24% 56.55% 8.24%" data-node-id="4:337" data-name="Vector">
           <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgVector7.svg">
         </div>
-        <div data-node-id="4:338" style="position:absolute;bottom:88.67%;display:flex;align-items:center;justify-content:center;left:calc(50% - 479.04px);top:10.69%;container-type:size">
+        <div id="about-us" tabindex="-1" data-node-id="4:338" style="position:absolute;bottom:88.67%;display:flex;align-items:center;justify-content:center;left:calc(50% - 479.04px);top:10.69%;container-type:size">
           <div style="flex:none;height:hypot(-2.226cqw,100cqh);width:97.774cqw;transform:skewX(-12deg)">
             <p style="word-break:break-word;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-weight:700;line-height:0;font-style:normal;position:relative;color:#ff5a14;font-size:0px;white-space:nowrap">
               <span style="font-family:'Noto Sans JP','Noto Sans JP',Arial,sans-serif;line-height:normal;font-size:85.358px">そ</span>
@@ -106,9 +112,7 @@
             <span style="position:absolute;inset:22.03% 11.83% 77.68% 9.56%" data-node-id="4:355">カンナビスの新しいスタンダードをつくります。</span>
           </p>
         </div>
-        <div style="position:absolute;inset:0.24% 89.14% 99.41% 3.61%" data-node-id="4:356" data-name="Group">
-          <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgGroup.svg">
-        </div>
+        <button class="site-menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="site-menu" data-node-id="4:356"><img src="assets/lp-imgGroup.svg" alt="" width="57" height="57"></button>
         <a href="https://www.instagram.com/doope_cbd_vape?stkn=MWJxZmYxbW5ydTd4cQ%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="DOOPEのInstagram（新しいタブで開く）" style="position:absolute;inset:0.18% 14.05% 99.32% 78.49%;z-index:16;pointer-events:auto" data-node-id="4:360" data-name="Group">
           <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgGroup1.svg">
         </a>
@@ -152,7 +156,7 @@
             </div>
           </div>
         </div>
-        <div data-node-id="4:386" style="position:absolute;bottom:74.24%;display:flex;align-items:center;justify-content:center;left:calc(50% - 225.29px);top:25.08%;container-type:size">
+        <div id="product" tabindex="-1" data-node-id="4:386" style="position:absolute;bottom:74.24%;display:flex;align-items:center;justify-content:center;left:calc(50% - 225.29px);top:25.08%;container-type:size">
           <div style="flex:none;height:hypot(-4.75916cqw,100cqh);width:95.2408cqw;transform:skewX(-12deg)">
             <p style="word-break:break-word;font-family:'Helvetica Neue LT Std','Noto Sans JP',Arial,sans-serif;line-height:normal;font-style:normal;position:relative;font-size:93.041px;color:#fff;white-space:nowrap">PRODUCT</p>
           </div>
@@ -162,7 +166,7 @@
             <img alt="" style="display:block;max-width:none;width:100%;height:100%" src="assets/lp-imgVector8.svg">
           </div>
         </div>
-        <div data-node-id="4:388" style="position:absolute;display:flex;inset:73.38% 39.34% 25.94% 39.99%;align-items:center;justify-content:center;container-type:size">
+        <div id="faq" tabindex="-1" data-node-id="4:388" style="position:absolute;display:flex;inset:73.38% 39.34% 25.94% 39.99%;align-items:center;justify-content:center;container-type:size">
           <div style="flex:none;height:hypot(-10.4287cqw,100cqh);width:89.5713cqw;transform:skewX(-12deg)">
             <p style="word-break:break-word;font-family:'Helvetica Neue LT Std','Noto Sans JP',Arial,sans-serif;line-height:normal;font-style:normal;position:relative;font-size:93.041px;color:#fff;white-space:nowrap">FAQ</p>
           </div>
@@ -172,7 +176,7 @@
             <img alt="" style="display:block;max-width:none;width:100%;height:100%" src="assets/lp-imgVector9.svg">
           </div>
         </div>
-        <div data-node-id="4:390" style="position:absolute;bottom:42.52%;display:flex;align-items:center;justify-content:center;left:calc(50% - 353.29px);top:56.8%;container-type:size">
+        <div id="how-to-enjoy" tabindex="-1" data-node-id="4:390" style="position:absolute;bottom:42.52%;display:flex;align-items:center;justify-content:center;left:calc(50% - 353.29px);top:56.8%;container-type:size">
           <div style="flex:none;height:hypot(-3.10775cqw,100cqh);width:96.8923cqw;transform:skewX(-12deg)">
             <p style="word-break:break-word;font-family:'Helvetica Neue LT Std','Noto Sans JP',Arial,sans-serif;line-height:normal;font-style:normal;position:relative;color:#ff5a14;font-size:93.041px;white-space:nowrap">HOW TO ENJOY</p>
           </div>
@@ -315,7 +319,7 @@
             <span style="position:absolute;inset:32.18% 18.11% 67.42% 18.65%;white-space:nowrap" data-node-id="4:432">TERPEN&amp;LIQUITIZER 30%</span>
           </p>
         </div>
-        <a class="buy-now-hotspot buy-now-hotspot--hero" href="buy.html" aria-label="DOOPE #1を購入する" style="position:absolute;height:139.38px;left:179.16px;top:1470px;width:721.68px" data-node-id="15:2"><div class="buy-now-visual">
+        <a class="buy-now-hotspot buy-now-hotspot--hero" href="buy.html" aria-label="DOOPE #1を購入する" style="position:absolute;height:139.38px;left:179.16px;top:1510px;width:721.68px" data-node-id="15:2"><div class="buy-now-visual">
           <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/hero-buy-frame.svg">
           <div data-node-id="15:4" style="position:absolute;display:flex;align-items:center;justify-content:center;left:21.87%;right:7.16%;top:calc(50% - 46.89px);container-type:size">
             <div style="flex:none;height:hypot(-4.91186cqw,100cqh);width:95.0881cqw;transform:skewX(-12deg)">
@@ -439,12 +443,9 @@
             <span style="position:absolute;inset:78.68% 9.59% 21.04% 10.69%" data-node-id="4:533">法律に引っかかる可能性は限りなく低いといえます。</span>
           </p>
         </div>
-        <div style="position:absolute;height:108.63px;left:calc(50% + 16.26px);top:13852.93px;width:490.53px;transform:translateX(-50%)" data-node-id="4:534">
-          <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgFrame1.svg">
-          <p style="word-break:break-word;position:absolute;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-weight:700;line-height:normal;left:calc(50% - 199.99px);font-style:normal;color:#ff5a14;font-size:57.03px;top:calc(50% - 34.24px);white-space:nowrap" data-node-id="4:536">
-            警察対応ページ
-          </p>
-        </div>
+        <a class="police-link" href="police.html" target="_blank" rel="noopener noreferrer" aria-label="警察対応ページを開く（新しいタブで開きます）" data-node-id="4:534">
+          <span data-node-id="4:536">警察対応ページを開く</span><span class="police-link__arrow" aria-hidden="true">↗</span>
+        </a>
         <div style="word-break:break-word;position:absolute;display:contents;font-family:'Inter','Noto Sans JP',Arial,sans-serif;font-weight:700;inset:83.72% 11.85% 14.9% 14.91%;line-height:normal;font-style:normal;color:#e1f550;font-size:36px;white-space:nowrap" data-node-id="4:537" data-name="Group">
           <p class="copy-paragraph">
             <span style="position:absolute;inset:83.72% 18.21% 16.01% 20.41%" data-node-id="4:538">本体裏側のQRコードに、職務質問の際に</span>
@@ -536,6 +537,10 @@
           <button type="submit">送信する</button>
           <span class="sr-only" aria-live="polite" data-form-status></span>
         </form>
+        <nav class="footer-legal" aria-label="ご利用案内">
+          <a href="terms.html" target="_blank" rel="noopener noreferrer">ご利用規約<span aria-hidden="true"> ↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
+          <a href="legal.html" target="_blank" rel="noopener noreferrer">特定商取引法に基づく表記<span aria-hidden="true"> ↗</span><span class="sr-only">（新しいタブで開きます）</span></a>
+        </nav>
         <div style="position:absolute;display:contents;inset:99.36% 85.46% 0.22% 2.49%" data-node-id="4:571" data-name="VpW6mr">
           <div style="position:absolute;inset:99.36% 85.46% 0.22% 2.49%" data-node-id="4:572" data-name="Group">
             <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/lp-imgGroup9.svg">
@@ -555,5 +560,11 @@
       </div>
     </div>
   </main>
+  <nav class="site-menu" id="site-menu" aria-label="ページ内メニュー" hidden>
+    <a href="#about-us">ABOUT US</a>
+    <a href="#product">PRODUCT</a>
+    <a href="#how-to-enjoy">HOW TO ENJOY</a>
+    <a href="#faq">FAQ</a>
+  </nav>
 </body>
 </html>

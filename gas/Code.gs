@@ -1,5 +1,5 @@
 // Doope order/email integration — TEST ONLY until production settings are agreed.
-const ORDER_HEADERS = ['受付ID（システム用）', '照合情報（システム用）', '注文番号', '注文日時', 'ステータス', 'お名前', 'メールアドレス', '電話番号', 'ご注文者住所', 'お届け先', '50ml 数量', '100ml 数量', '商品小計', '送料（テスト）', '合計金額', '注文メモ', 'メール送信結果'];
+const ORDER_HEADERS = ['受付ID（システム用）', '照合情報（システム用）', '注文番号', '注文日時', 'ステータス', 'お名前', 'メールアドレス', '電話番号', 'ご注文者住所', 'お届け先', '0.5ml 数量', '1ml 数量', '商品小計', '送料（テスト）', '合計金額', '注文メモ', 'メール送信結果'];
 
 function setupTest() {
   const properties = PropertiesService.getScriptProperties();
@@ -64,7 +64,7 @@ function address_(raw) {
   if (!raw || typeof raw !== 'object') reject_('住所を入力してください。');
   const postal = text_(raw.postal, 12, true).normalize('NFKC').replace(/[-ー－\s]/g,'');
   if (!/^\d{7}$/.test(postal)) reject_('郵便番号を確認してください。');
-  return {postal:postal, prefecture:text_(raw.prefecture,8,true), city:text_(raw.city,120,true), street:text_(raw.street,160,true), building:text_(raw.building,160,true)};
+  return {postal:postal, prefecture:text_(raw.prefecture,8,true), city:text_(raw.city,120,true), street:text_(raw.street,160,true), building:text_(raw.building,160,false)};
 }
 function validateOrder_(raw, properties) {
   if (!raw || raw.testMode !== true) reject_('現在はテスト注文のみ受け付けています。');
@@ -128,8 +128,8 @@ function addressText_(address) { return '〒' + address.postal + '\n' + address.
 function emailBody_(order, orderId) {
   const yen = value => '¥' + value.toLocaleString('ja-JP');
   const items = [];
-  if (order.half) items.push('Doope マンゴー 50ml × ' + order.half + '　' + yen(order.half * 7800));
-  if (order.full) items.push('Doope マンゴー 100ml × ' + order.full + '　' + yen(order.full * 16800));
+  if (order.half) items.push('DOOPE #1 マンゴー 0.5ml × ' + order.half + '　' + yen(order.half * 7800));
+  if (order.full) items.push('DOOPE #1 マンゴー 1ml × ' + order.full + '　' + yen(order.full * 16800));
   // Replace this thank-you text here once the final wording is supplied.
   return ['【動作確認用メールです。実際の注文ではありません。お振込みは不要です。】','',order.name + ' 様','',
     'このたびはDoopeをお選びいただき、ありがとうございます。',

@@ -46,7 +46,7 @@ test('non-test recipients and live requests are rejected',()=>{
 });
 test('invalid quantities and required address fields are rejected',()=>{
   const f=fixture();for(const count of [-1,1.5,11,'1']) {const raw=f.raw();raw.half=count;assert.throws(()=>f.validate(raw),/数量/);}
-  const raw=f.raw();raw.billing.building='';assert.throws(()=>f.validate(raw),/必須/);
+  const raw=f.raw();raw.billing.street='';assert.throws(()=>f.validate(raw),/必須/);
 });
 test('daily quota failure does not save or send',()=>{
   const f=fixture({quota:0});assert.throws(()=>f.save(f.validate(f.raw())),/送信枠/);assert.equal(f.rows.length,1);assert.equal(f.sent.length,0);
@@ -83,3 +83,5 @@ test('JSON transport confirms result without exposing customer data',()=>{
 test('fulfillment status changes do not resend email',()=>{
  const f=fixture();const order=f.validate(f.raw());f.save(order);assert.equal(f.rows[1][4],'入金確認待ち');f.rows[1][4]='出荷済み';f.save(order);assert.equal(f.sent.length,1);assert.equal(f.rows[1][4],'出荷済み');
 });
+
+test('building is optional for billing and shipping',()=>{ const f=fixture();const raw=f.raw();raw.billing.building='';raw.shipping.building='';assert.equal(f.save(f.validate(raw)).ok,true); });

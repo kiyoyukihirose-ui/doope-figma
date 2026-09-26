@@ -25,6 +25,9 @@
       button.lastTime = time;
       button.fill = reducedMotion.matches ? targetFill : button.fill + (targetFill - button.fill) * (1 - Math.exp(-delta / 190));
       if (Math.abs(targetFill - button.fill) < .001) button.fill = targetFill;
+      // Drive the shadow from the liquid itself so it is visible as the surface fills.
+      const shadow = Math.max(0, Math.min(1, (button.fill - .65) / .25));
+      button.visual.style.setProperty('--liquid-shadow', shadow.toFixed(3));
       const phase = time / 1000 * Math.PI * 2 / 5.5;
       const wave = (level, amplitude, offset, color) => {
         ctx.beginPath();
